@@ -1,0 +1,26 @@
+{
+  "name": "resume-template",
+  "version": "1.0.0",
+  "description": "仿照五百丁简历制作工具。实现其基本功能。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HappyJeannie/resume-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HappyJeannie/resume-template/issues"
+  },
+  "homepage": "https://github.com/HappyJeannie/resume-template#readme",
+  "devDependencies": {
+    "leancloud-storage": "^3.9.0"
+  },
+  "dependencies": {
+    "leancloud-storage": "^3.9.0"
+  }
+}
