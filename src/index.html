@@ -31,14 +31,12 @@
           <button @click="isediting = !isediting">编辑</button> -->
         </h1>
         <h1>
-          <edit-span :value="resume.name" @edit="y"></edit-span>
+          <edit-span :value="resume.name" @edit="editProfile('name',$event)"></edit-span>
         </h1>
-        <h1>{{resume.name}}</h1>
-        <edit-span :value="resume.age"></edit-span>
-        <span>{{resume.age}}</span> |
-        <span>{{resume.gender}}</span> |
-        <span>{{resume.phone}}</span> |
-        <span>{{resume.email}}</span>
+        <edit-span :value="resume.age" @edit="editProfile('age',$event)"></edit-span> |
+        <edit-span :value="resume.gender" @edit="editProfile('gender',$event)"></edit-span> |
+        <edit-span :value="resume.phone" @edit="editProfile('phone',$event)"></edit-span> |
+        <edit-span :value="resume.email" @edit="editProfile('email',$event)"></edit-span>
       </section>
       <section class="career">
         <h2>工作经历</h2>
@@ -197,6 +195,7 @@
   <script src="./../vendors/leancloud/av-min.js"></script>
   <script src="./../vendors/leancloud/av-init.js"></script>
   <script src="./../vendors/vue/vue.min.js"></script>
+  <script src="./js/edit-sapn.js"></script>
   <script src="./js/index.js"></script>
 </body>
 
