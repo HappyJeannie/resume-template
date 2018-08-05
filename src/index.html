@@ -31,8 +31,9 @@
           <button @click="isediting = !isediting">编辑</button> -->
         </h1>
         <h1>
-          <edit-span :value="resume.name"></edit-span>
+          <edit-span :value="resume.name" @edit="y"></edit-span>
         </h1>
+        <h1>{{resume.name}}</h1>
         <edit-span :value="resume.age"></edit-span>
         <span>{{resume.age}}</span> |
         <span>{{resume.gender}}</span> |

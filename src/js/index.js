@@ -2,7 +2,7 @@ Vue.component('edit-span',{
   template : `
     <span>
       <span v-if="!isediting">{{value}}</span>
-      <input v-else type="text" v-model="value">
+      <input v-else type="text" v-model="value" @input="x">
       <button @click="isediting = !isediting">编辑</button>
     </span>
   `,
@@ -11,7 +11,12 @@ Vue.component('edit-span',{
       isediting : false
     }
   },
-  props : ['value']
+  props : ['value'],
+  methods:{
+    x(e){
+      this.$emit('edit',e.target.value)
+    }
+  }
 })
 let vm = new Vue({
   el : '#app',
@@ -25,6 +30,12 @@ let vm = new Vue({
         phone : 13313313133,
         email : '111@qq.com'
       }
+    }
+  },
+  methods:{
+    y(val){
+      console.log(val)
+      this.resume.name = val;
     }
   }
 })
