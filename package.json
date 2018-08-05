@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/HappyJeannie/resume-template#readme",
   "devDependencies": {
-    "leancloud-storage": "^3.9.0"
+    "leancloud-storage": "^3.9.0",
+    "vue": "^2.5.17"
   },
   "dependencies": {
     "leancloud-storage": "^3.9.0"

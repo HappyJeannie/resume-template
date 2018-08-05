@@ -1,6 +1,7 @@
 *{
   margin: 0 ;
   padding: 0;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei";
 }
 *,*::before,*::after{
   box-sizing: border-box;

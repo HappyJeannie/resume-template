@@ -89,3 +89,6 @@ body main div.resume section.skill .list ul li {
   font-size: 14px;
   line-height: 28px;
 }
+body main div.resume section.profile {
+  text-align: center;
+}

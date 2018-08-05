@@ -23,13 +23,21 @@
     </div>
   </aside>
   <main>
-    <div class="resume">
+    <div class="resume" id="app">
       <section class="profile">
-        <h1>Summer</h1>
-        <span>age</span> |
-        <span>男</span> |
-        <span>13313313133</span> |
-        <span>11111@qq.com</span>
+        <h1>
+          <!-- <span v-if="!isediting">{{resume.name}}</span>
+          <input v-else type="text" v-model="resume.name">
+          <button @click="isediting = !isediting">编辑</button> -->
+        </h1>
+        <h1>
+          <edit-span :value="resume.name"></edit-span>
+        </h1>
+        <edit-span :value="resume.age"></edit-span>
+        <span>{{resume.age}}</span> |
+        <span>{{resume.gender}}</span> |
+        <span>{{resume.phone}}</span> |
+        <span>{{resume.email}}</span>
       </section>
       <section class="career">
         <h2>工作经历</h2>
@@ -187,6 +195,8 @@
   </main>
   <script src="./../vendors/leancloud/av-min.js"></script>
   <script src="./../vendors/leancloud/av-init.js"></script>
+  <script src="./../vendors/vue/vue.min.js"></script>
+  <script src="./js/index.js"></script>
 </body>
 
 </html>
