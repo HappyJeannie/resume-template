@@ -4,6 +4,8 @@ let vm = new Vue({
     return {
       showLogin:false,
       showRegist:false,
+      showForget:false,
+      isLogin:false,
       resume : {
         name : 'Summer',
         age : '22',
@@ -38,7 +40,25 @@ let vm = new Vue({
       });
     },
     toLogin(){
-      console.log('跳转登录')
+      console.log('跳转登录');
+      this.showLogin = true;
+      this.showRegist = false;
+      this.showForget = false;
+    },
+    toRegist(){
+      this.showLogin = false;
+      this.showRegist = true;
+      this.showForget = false;
+    },
+    toForget(){
+      this.showLogin = false;
+      this.showRegist = false;
+      this.showForget = true;
+    },
+    closeModal(){
+      this.showLogin = false;
+      this.showRegist = false;
+      this.showForget = false;
     }
   }
 })

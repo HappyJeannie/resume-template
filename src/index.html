@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="./../assets/css/reset.css" />
   <link rel="stylesheet" type="text/css" href="./css/login.css" />
   <link rel="stylesheet" type="text/css" href="./css/regist.css" />
+  <link rel="stylesheet" type="text/css" href="./css/forget.css" />
   <link rel="stylesheet" type="text/css" href="./css/index.css" />
 </head>
 
@@ -22,7 +23,8 @@
         <button>分享</button>
       </div>
       <div class="btm">
-        <button>退出</button>
+        <button v-if="isLogin">退出</button>
+        <button v-else @click="toLogin">登录</button>
       </div>
     </aside>
     <main>
@@ -196,7 +198,7 @@
       </div>
     </main>
     <div class="login modal" v-show="showLogin">
-      <div class="shadow"></div>
+      <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>登录</h4>
         <form onSubmit>
@@ -213,15 +215,15 @@
             </label>
           </div>
           <div class="input-group submit">
-            <span>没有账号？立即注册</span>
-            <span>忘记密码</span>
+            <span @click="toRegist">没有账号？立即注册</span>
+            <span @click="toForget">忘记密码</span>
             <button>确定</button>
           </div>
         </form>
       </div>
     </div>
     <div class="regist modal" v-show="showRegist">
-      <div class="shadow"></div>
+      <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>新用户注册</h4>
         <form>
@@ -244,7 +246,25 @@
             </label>
           </div>
           <div class="input-group submit">
-            <span>已有账号，立即登录</span>
+            <span @click="toLogin">已有账号，立即登录</span>
+            <button>确定</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="forget modal" v-show="showForget">
+      <div class="shadow" @click="closeModal"></div>
+      <div class="form">
+        <h4>忘记密码</h4>
+        <form>
+          <div class="input-group">
+            <label>
+              <span class="title">邮箱：</span>
+              <input type="text" placeholder="请输入注册邮箱" name="email" />
+            </label>
+          </div>
+          <div class="input-group submit">
+            <span @click="toLogin">登录</span>
             <button>确定</button>
           </div>
         </form>
