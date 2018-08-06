@@ -25,10 +25,10 @@ let vm = new Vue({
       forget:{
         email:''
       },
-      userId:''
+      currentUser:{}
     }
   },
-  mounted(){
+  created(){
     this.checkLogin();
   },
   methods:{
@@ -36,7 +36,7 @@ let vm = new Vue({
       this.resume[val] = event;
     },
     clickSaveBtn(){
-      var currentUser = AV.User.current();
+      let currentUser = AV.User.current();
       console.log(currentUser)
       if (currentUser) {
         this.save();
@@ -47,7 +47,7 @@ let vm = new Vue({
     },
     save(){
       console.log('保存用户信息')
-      var user = AV.Object.createWithoutData('User', this.userId);
+      let user = AV.Object.createWithoutData('User', this.currentUser.objectId);
       // 修改属性
       user.set('resume', this.resume);
       // 保存到云端
@@ -55,7 +55,7 @@ let vm = new Vue({
         .then(
           (res)=>{
             console.log('保存成功')
-            console.log(res);
+            console.log(res.toJSON());
           },
           (error) => {
             console.log('请求出错')
@@ -91,14 +91,11 @@ let vm = new Vue({
         alert('用户名或密码不能为空');
       }else{
         AV.User.logIn(this.login.username, this.login.password).then((user) => {
-          console.log(user);
-          this.userId = user.id;
+          this.currentUser = user.toJSON();
           this.closeModal();
           this.isLogin = true;
         }, function (error) {
           console.log('登录出错')
-          console.log(error.code);
-          console.log(error)
           if(error.code === 211){
             alert('用户未注册')
           }
@@ -111,7 +108,7 @@ let vm = new Vue({
         alert('用户名、密码和邮箱不能为空');
       }else{
          // 新建 AVUser 对象实例
-        var user = new AV.User();
+        let user = new AV.User();
         // 设置用户名
         user.setUsername(this.regist.username);
         // 设置密码
@@ -119,8 +116,9 @@ let vm = new Vue({
         // 设置邮箱
         user.setEmail(this.regist.email);
         user.signUp().then((user) => {
+          console.log('注册成功')
             console.log(user);
-            this.userId = user.id;
+            this.currentUser = user.toJSON();
             this.closeModal();
             this.isLogin = true;
         }, function (error) {
@@ -150,18 +148,15 @@ let vm = new Vue({
       // 登出
       AV.User.logOut().then((res)=>{
         console.log('登出成功')
-        console.log(res)
-        this.userId = '';
+        this.currentUser = {};
         this.isLogin = false;
       });
-      // 现在的 currentUser 是 null 了
-      var currentUser = AV.User.current();
     },
     checkLogin(){
-      var currentUser = AV.User.current();
-      console.log(currentUser)
+      let currentUser = AV.User.current();
       if (currentUser) {
-        this.userId = currentUser.id;
+        console.log('登录啦')
+        this.currentUser = currentUser.toJSON();
         this.isLogin = true;
       }
     }

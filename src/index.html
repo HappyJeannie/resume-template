@@ -30,11 +30,7 @@
     <main>
       <div class="resume">
         <section class="profile">
-          <h1>
-            <!-- <span v-if="!isediting">{{resume.name}}</span>
-                <input v-else type="text" v-model="resume.name">
-                <button @click="isediting = !isediting">编辑</button> -->
-          </h1>
+          {{currentUser}}
           <h1>
             <edit-span :value="resume.name" @edit="editProfile('name',$event)"></edit-span>
           </h1>
