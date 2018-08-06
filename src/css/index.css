@@ -1,94 +1,94 @@
-body {
+#app {
   display: flex;
   flex-direction: row-reverse;
   height: 100vh;
 }
-body aside {
+#app aside {
   width: 100px;
   display: flex;
   flex-direction: column;
   border-left: 1px solid #e6e6e6;
 }
-body aside button {
+#app aside button {
   padding: 10px;
   background: #e6e6e6;
   border: none;
   border-bottom: 1px solid #999;
 }
-body aside div.btm {
+#app aside div.btm {
   height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
-body aside div.tp {
+#app aside div.tp {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-body main {
+#app main {
   flex: 1;
   overflow: hidden;
   height: 100%;
 }
-body main div.resume {
+#app main div.resume {
   max-width: 800px;
   margin: 0 auto;
   border: 1px solid #f00;
   height: 100%;
   overflow-y: auto;
 }
-body main div.resume section {
+#app main div.resume section {
   margin-bottom: 20px;
   border-bottom: 1px solid #e6e6e6;
   padding: 10px;
 }
-body main div.resume section h1,
-body main div.resume section h2 {
+#app main div.resume section h1,
+#app main div.resume section h2 {
   text-align: center;
 }
-body main div.resume section .list ul li {
+#app main div.resume section .list ul li {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
 }
-body main div.resume section.career .list ul li,
-body main div.resume section.project .list ul li {
+#app main div.resume section.career .list ul li,
+#app main div.resume section.project .list ul li {
   display: block;
 }
-body main div.resume section.career .list ul li div.top,
-body main div.resume section.project .list ul li div.top {
+#app main div.resume section.career .list ul li div.top,
+#app main div.resume section.project .list ul li div.top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   line-height: 30px;
 }
-body main div.resume section.career .list ul li div.btm,
-body main div.resume section.project .list ul li div.btm {
+#app main div.resume section.career .list ul li div.btm,
+#app main div.resume section.project .list ul li div.btm {
   font-size: 14px;
   line-height: 28px;
 }
-body main div.resume section.edu .list ul li {
+#app main div.resume section.edu .list ul li {
   justify-content: space-between;
   line-height: 30px;
   margin-bottom: 10px;
 }
-body main div.resume section.edu .list ul li div.lt {
+#app main div.resume section.edu .list ul li div.lt {
   flex: 1;
   display: flex;
 }
-body main div.resume section.edu .list ul li div.lt > span {
+#app main div.resume section.edu .list ul li div.lt > span {
   width: 50%;
   text-align: left;
 }
-body main div.resume section.edu .list ul li div.rt {
+#app main div.resume section.edu .list ul li div.rt {
   width: 150px;
   text-align: right;
 }
-body main div.resume section.skill .list ul li {
+#app main div.resume section.skill .list ul li {
   font-size: 14px;
   line-height: 28px;
 }
-body main div.resume section.profile {
+#app main div.resume section.profile {
   text-align: center;
 }

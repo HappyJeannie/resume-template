@@ -7,191 +7,251 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>简历模版</title>
   <link rel="stylesheet" type="text/css" href="./../assets/css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="./css/login.css" />
+  <link rel="stylesheet" type="text/css" href="./css/regist.css" />
   <link rel="stylesheet" type="text/css" href="./css/index.css" />
 </head>
 
 <body>
-  <aside>
-    <div class="tp">
-      <button>保存</button>
-      <button>删除</button>
-      <button>预览</button>
-      <button>分享</button>
-    </div>
-    <div class="btm">
+  <div id="app">
+    <aside>
+      <div class="tp">
+        <button @click="clickSaveBtn">保存</button>
+        <button>删除</button>
+        <button>预览</button>
+        <button>分享</button>
+      </div>
+      <div class="btm">
         <button>退出</button>
+      </div>
+    </aside>
+    <main>
+      <div class="resume">
+        <section class="profile">
+          <h1>
+            <!-- <span v-if="!isediting">{{resume.name}}</span>
+                <input v-else type="text" v-model="resume.name">
+                <button @click="isediting = !isediting">编辑</button> -->
+          </h1>
+          <h1>
+            <edit-span :value="resume.name" @edit="editProfile('name',$event)"></edit-span>
+          </h1>
+          <edit-span :value="resume.age" @edit="editProfile('age',$event)"></edit-span> |
+          <edit-span :value="resume.gender" @edit="editProfile('gender',$event)"></edit-span> |
+          <edit-span :value="resume.phone" @edit="editProfile('phone',$event)"></edit-span> |
+          <edit-span :value="resume.email" @edit="editProfile('email',$event)"></edit-span>
+        </section>
+        <section class="career">
+          <h2>工作经历</h2>
+          <div class="list">
+            <ul>
+              <li>
+                <div class="top">
+                  <div class="lt">
+                    <span class="company">公司一</span>
+                    <span class="title">职位</span>
+                  </div>
+                  <div class="rt">
+                    <span class="time">2011-2012</span>
+                  </div>
+                </div>
+                <div class="btm">
+                  <p class="desc">工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介</p>
+                </div>
+              </li>
+              <li>
+                <div class="top">
+                  <div class="lt">
+                    <span class="company">公司一</span>
+                    <span class="title">职位</span>
+                  </div>
+                  <div class="rt">
+                    <span class="time">2011-2012</span>
+                  </div>
+                </div>
+                <div class="btm">
+                  <p class="desc">工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介</p>
+                </div>
+              </li>
+              <li>
+                <div class="top">
+                  <div class="lt">
+                    <span class="company">公司一</span>
+                    <span class="title">职位</span>
+                  </div>
+                  <div class="rt">
+                    <span class="time">2011-2012</span>
+                  </div>
+                </div>
+                <div class="btm">
+                  <p class="desc">工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="edu">
+          <h2>教育经历</h2>
+          <div class="list">
+            <ul>
+              <li>
+                <div class="lt">
+                  <span class="school">学校</span>
+                  <span class="major">专业</span>
+                </div>
+                <div class="rt">
+                  <span class="time">2011-2012</span>
+                </div>
+              </li>
+              <li>
+                <div class="lt">
+                  <span class="school">学校</span>
+                  <span class="major">专业</span>
+                </div>
+                <div class="rt">
+                  <span class="time">2011-2012</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="project">
+          <h2>项目经历</h2>
+          <div class="list">
+            <ul>
+              <li>
+                <div class="top">
+                  <div class="lt">
+                    <span class="name">xxx 项目</span>
+                    <span class="link">link</span>
+                  </div>
+                  <div class="rt">
+                    <span class="keywords">css html</span>
+                  </div>
+                </div>
+                <div class="btm">
+                  <div class="desc">
+                    描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="top">
+                  <div class="lt">
+                    <span class="name">xxx 项目</span>
+                    <span class="link">link</span>
+                  </div>
+                  <div class="rt">
+                    <span class="keywords">css html</span>
+                  </div>
+                </div>
+                <div class="btm">
+                  <div class="desc">
+                    描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="top">
+                  <div class="lt">
+                    <span class="name">xxx 项目</span>
+                    <span class="link">link</span>
+                  </div>
+                  <div class="rt">
+                    <span class="keywords">css html</span>
+                  </div>
+                </div>
+                <div class="btm">
+                  <div class="desc">
+                    描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="skill">
+          <h2>技能</h2>
+          <div class="list">
+            <ul>
+              <li>
+                <span class="name">名称</span>
+                <span class="desc">描述</span>
+              </li>
+              <li>
+                <span class="name">名称</span>
+                <span class="desc">描述</span>
+              </li>
+              <li>
+                <span class="name">名称</span>
+                <span class="desc">描述</span>
+              </li>
+              <li>
+                <span class="name">名称</span>
+                <span class="desc">描述</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div class="login modal" v-show="showLogin">
+      <div class="shadow"></div>
+      <div class="form">
+        <h4>登录</h4>
+        <form onSubmit>
+          <div class="input-group">
+            <label>
+              <span class="title">用户名：</span>
+              <input type="text" placeholder="请输入用户名" name="username" />
+            </label>
+          </div>
+          <div class="input-group">
+            <label>
+              <span class="title">密码：</span>
+              <input type="password" placeholder="请输入密码" name="password" />
+            </label>
+          </div>
+          <div class="input-group submit">
+            <span>没有账号？立即注册</span>
+            <span>忘记密码</span>
+            <button>确定</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </aside>
-  <main>
-    <div class="resume" id="app">
-      <section class="profile">
-        <h1>
-          <!-- <span v-if="!isediting">{{resume.name}}</span>
-          <input v-else type="text" v-model="resume.name">
-          <button @click="isediting = !isediting">编辑</button> -->
-        </h1>
-        <h1>
-          <edit-span :value="resume.name" @edit="editProfile('name',$event)"></edit-span>
-        </h1>
-        <edit-span :value="resume.age" @edit="editProfile('age',$event)"></edit-span> |
-        <edit-span :value="resume.gender" @edit="editProfile('gender',$event)"></edit-span> |
-        <edit-span :value="resume.phone" @edit="editProfile('phone',$event)"></edit-span> |
-        <edit-span :value="resume.email" @edit="editProfile('email',$event)"></edit-span>
-      </section>
-      <section class="career">
-        <h2>工作经历</h2>
-        <div class="list">
-          <ul>
-            <li>
-              <div class="top">
-                <div class="lt">
-                  <span class="company">公司一</span>
-                  <span class="title">职位</span>
-                </div>
-                <div class="rt">
-                  <span class="time">2011-2012</span>
-                </div>
-              </div>
-              <div class="btm">
-                <p class="desc">工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介</p>
-              </div>
-            </li>
-            <li>
-              <div class="top">
-                <div class="lt">
-                  <span class="company">公司一</span>
-                  <span class="title">职位</span>
-                </div>
-                <div class="rt">
-                  <span class="time">2011-2012</span>
-                </div>
-              </div>
-              <div class="btm">
-                <p class="desc">工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介</p>
-              </div>
-            </li>
-            <li>
-              <div class="top">
-                <div class="lt">
-                  <span class="company">公司一</span>
-                  <span class="title">职位</span>
-                </div>
-                <div class="rt">
-                  <span class="time">2011-2012</span>
-                </div>
-              </div>
-              <div class="btm">
-                <p class="desc">工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介工作简介</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section class="edu">
-        <h2>教育经历</h2>
-        <div class="list">
-          <ul>
-            <li>
-              <div class="lt">
-                <span class="school">学校</span>
-                <span class="major">专业</span>
-              </div>
-              <div class="rt">
-                <span class="time">2011-2012</span>
-              </div>
-            </li>
-            <li>
-              <div class="lt">
-                <span class="school">学校</span>
-                <span class="major">专业</span>
-              </div>
-              <div class="rt">
-                <span class="time">2011-2012</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section class="project">
-        <h2>项目经历</h2>
-        <div class="list">
-          <ul>
-            <li>
-              <div class="top">
-                <div class="lt">
-                  <span class="name">xxx 项目</span>
-                  <span class="link">link</span>
-                </div>
-                <div class="rt">
-                  <span class="keywords">css html</span>
-                </div>
-              </div>
-              <div class="btm">
-                <div class="desc">
-                  描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="top">
-                <div class="lt">
-                  <span class="name">xxx 项目</span>
-                  <span class="link">link</span>
-                </div>
-                <div class="rt">
-                  <span class="keywords">css html</span>
-                </div>
-              </div>
-              <div class="btm">
-                <div class="desc">
-                  描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="top">
-                <div class="lt">
-                  <span class="name">xxx 项目</span>
-                  <span class="link">link</span>
-                </div>
-                <div class="rt">
-                  <span class="keywords">css html</span>
-                </div>
-              </div>
-              <div class="btm">
-                <div class="desc">
-                  描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section class="skill">
-        <h2>技能</h2>
-        <div class="list">
-          <ul>
-            <li>
-              <span class="name">名称</span>
-              <span class="desc">描述</span>
-            </li>
-            <li>
-              <span class="name">名称</span>
-              <span class="desc">描述</span>
-            </li>
-            <li>
-              <span class="name">名称</span>
-              <span class="desc">描述</span>
-            </li>
-            <li>
-              <span class="name">名称</span>
-              <span class="desc">描述</span>
-            </li>
-          </ul>
-        </div>
-      </section>
+    <div class="regist modal" v-show="showRegist">
+      <div class="shadow"></div>
+      <div class="form">
+        <h4>新用户注册</h4>
+        <form>
+          <div class="input-group">
+            <label>
+              <span class="title">邮箱：</span>
+              <input type="email" placeholder="请输入邮箱" name="email" />
+            </label>
+          </div>
+          <div class="input-group">
+            <label>
+              <span class="title">用户名：</span>
+              <input type="text" placeholder="请输入用户名" name="username" />
+            </label>
+          </div>
+          <div class="input-group">
+            <label>
+              <span class="title">密码：</span>
+              <input type="password" placeholder="请输入密码" name="password" />
+            </label>
+          </div>
+          <div class="input-group submit">
+            <span>已有账号，立即登录</span>
+            <button>确定</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </main>
+  </div>
+
   <script src="./../vendors/leancloud/av-min.js"></script>
   <script src="./../vendors/leancloud/av-init.js"></script>
   <script src="./../vendors/vue/vue.min.js"></script>
