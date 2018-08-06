@@ -23,8 +23,8 @@
         <button>分享</button>
       </div>
       <div class="btm">
-        <button v-if="isLogin">退出</button>
-        <button v-else @click="toLogin">登录</button>
+        <button v-if="isLogin" @click="logout">退出</button>
+        <button v-else @click="loginModal">登录</button>
       </div>
     </aside>
     <main>
@@ -201,23 +201,23 @@
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>登录</h4>
-        <form onSubmit>
+        <form @submit.prevent="toLogin">
           <div class="input-group">
             <label>
               <span class="title">用户名：</span>
-              <input type="text" placeholder="请输入用户名" name="username" />
+              <input type="text" placeholder="请输入用户名" name="username" v-model="login.username"/>
             </label>
           </div>
           <div class="input-group">
             <label>
               <span class="title">密码：</span>
-              <input type="password" placeholder="请输入密码" name="password" />
+              <input type="password" placeholder="请输入密码" name="password" v-model="login.password" />
             </label>
           </div>
           <div class="input-group submit">
-            <span @click="toRegist">没有账号？立即注册</span>
-            <span @click="toForget">忘记密码</span>
-            <button>确定</button>
+            <span @click="registModal">没有账号？立即注册</span>
+            <span @click="forgetModal">忘记密码</span>
+            <button type="submit">确定</button>
           </div>
         </form>
       </div>
@@ -226,28 +226,28 @@
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>新用户注册</h4>
-        <form>
+        <form @submit.prevent="toRegist">
           <div class="input-group">
             <label>
               <span class="title">邮箱：</span>
-              <input type="email" placeholder="请输入邮箱" name="email" />
+              <input type="email" placeholder="请输入邮箱" name="email" v-model="regist.email"/>
             </label>
           </div>
           <div class="input-group">
             <label>
               <span class="title">用户名：</span>
-              <input type="text" placeholder="请输入用户名" name="username" />
+              <input type="text" placeholder="请输入用户名" name="username" v-model="regist.username"/>
             </label>
           </div>
           <div class="input-group">
             <label>
               <span class="title">密码：</span>
-              <input type="password" placeholder="请输入密码" name="password" />
+              <input type="password" placeholder="请输入密码" name="password" v-model="regist.password"/>
             </label>
           </div>
           <div class="input-group submit">
-            <span @click="toLogin">已有账号，立即登录</span>
-            <button>确定</button>
+            <span @click="loginModal">已有账号，立即登录</span>
+            <button type="submit">确定</button>
           </div>
         </form>
       </div>
@@ -256,16 +256,16 @@
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>忘记密码</h4>
-        <form>
+        <form @submit.prevent="toForget">
           <div class="input-group">
             <label>
               <span class="title">邮箱：</span>
-              <input type="text" placeholder="请输入注册邮箱" name="email" />
+              <input type="text" placeholder="请输入注册邮箱" name="email" v-model="forget.email" />
             </label>
           </div>
           <div class="input-group submit">
-            <span @click="toLogin">登录</span>
-            <button>确定</button>
+            <span @click="loginModal">登录</span>
+            <button type="submit">确定</button>
           </div>
         </form>
       </div>
