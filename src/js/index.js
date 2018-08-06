@@ -11,7 +11,13 @@ let vm = new Vue({
         age : '22',
         gender : '男',
         phone : 13313313133,
-        email : '111@qq.com'
+        email : '111@qq.com',
+        skills:[
+          {name:'技能名称',description:'技能描述'},
+          {name:'技能名称',description:'技能描述'},
+          {name:'技能名称',description:'技能描述'},
+          {name:'技能名称',description:'技能描述'}
+        ]
       },
       login:{
         username:'',
@@ -32,8 +38,18 @@ let vm = new Vue({
     this.checkLogin();
   },
   methods:{
-    editProfile(val,event){
-      this.resume[val] = event;
+    edit(key,value){
+      let reg = /\[(\d+)\]/;
+      key = key.replace(reg,(val,num)=>{return '.'+num});
+      keys= key.split('.');
+      let result = this.resume;
+      for(let i = 0;i<keys.length;i++){
+        if(i===keys.length-1){
+          result[keys[i]] = value;
+        }else{
+          result = result[keys[i]];
+        }
+      }
     },
     clickSaveBtn(){
       let currentUser = AV.User.current();

@@ -1,9 +1,9 @@
 Vue.component('edit-span',{
   template : `
     <span>
-      <span v-if="!isediting">{{value}}</span>
-      <input v-else type="text" v-model="value" @input="edit">
-      <button @click="isediting = !isediting">编辑</button>
+      <span v-if="!isediting" @click="isediting=true">{{value}}</span>
+      <input v-else type="text" v-model="value" @input="edit" @blur="isediting=false">
+      
     </span>
   `,
   data(){

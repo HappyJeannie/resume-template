@@ -30,14 +30,13 @@
     <main>
       <div class="resume">
         <section class="profile">
-          {{currentUser}}
           <h1>
-            <edit-span :value="resume.name" @edit="editProfile('name',$event)"></edit-span>
+            <edit-span :value="resume.name" @edit="edit('name',$event)"></edit-span>
           </h1>
-          <edit-span :value="resume.age" @edit="editProfile('age',$event)"></edit-span> |
-          <edit-span :value="resume.gender" @edit="editProfile('gender',$event)"></edit-span> |
-          <edit-span :value="resume.phone" @edit="editProfile('phone',$event)"></edit-span> |
-          <edit-span :value="resume.email" @edit="editProfile('email',$event)"></edit-span>
+          <edit-span :value="resume.age" @edit="edit('age',$event)"></edit-span> |
+          <edit-span :value="resume.gender" @edit="edit('gender',$event)"></edit-span> |
+          <edit-span :value="resume.phone" @edit="edit('phone',$event)"></edit-span> |
+          <edit-span :value="resume.email" @edit="edit('email',$event)"></edit-span>
         </section>
         <section class="career">
           <h2>工作经历</h2>
@@ -172,21 +171,14 @@
           <h2>技能</h2>
           <div class="list">
             <ul>
-              <li>
-                <span class="name">名称</span>
-                <span class="desc">描述</span>
-              </li>
-              <li>
-                <span class="name">名称</span>
-                <span class="desc">描述</span>
-              </li>
-              <li>
-                <span class="name">名称</span>
-                <span class="desc">描述</span>
-              </li>
-              <li>
-                <span class="name">名称</span>
-                <span class="desc">描述</span>
+              <li v-for="skill,index in resume.skills" v-key="index">
+                <span class="name">
+                  <edit-span :value="skill.name" @edit="edit(`skills[${index}].name`,$event)"></edit-span>
+                </span>
+                ：
+                <span class="desc">
+                  <edit-span :value="skill.description" @edit="edit(`skills[${index}].description`,$event)"></edit-span>
+                </span>
               </li>
             </ul>
           </div>
