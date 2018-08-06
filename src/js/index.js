@@ -168,13 +168,38 @@ let vm = new Vue({
         this.isLogin = false;
       });
     },
+    getUserInfo(){
+      console.log('获取用户信息')
+      let user = new AV.Query('User');
+      user.get(this.currentUser.objectId).then((res)=> {
+      
+        //this.resume = res.attributes.resume;
+        Object.assign(this.resume,res.attributes.resume);
+    
+      }).catch(function (error) {
+        // 异常处理
+        console.error(error);
+      });
+    },
     checkLogin(){
       let currentUser = AV.User.current();
       if (currentUser) {
         console.log('登录啦')
+        console.log(currentUser.toJSON())
         this.currentUser = currentUser.toJSON();
         this.isLogin = true;
+        this.getUserInfo();
       }
+    },
+    addSkills(){
+      this.resume.skills.push({
+        name:'请填写技能名称',
+        description:'请填写技能描述'
+      })
+    },
+    removeSkill(idx){
+      console.log(idx);
+      this.resume.skills.splice(idx,1);
     }
   }
 })

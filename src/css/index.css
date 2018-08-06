@@ -91,6 +91,12 @@ div[v-cloak] {
 #app main div.resume section.skill .list ul li {
   font-size: 14px;
   line-height: 28px;
+  position: relative;
+}
+#app main div.resume section.skill .list ul li .close {
+  position: absolute;
+  right: -6px;
+  top: 0px;
 }
 #app main div.resume section.profile {
   text-align: center;

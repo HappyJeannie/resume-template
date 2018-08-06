@@ -179,6 +179,10 @@
                 <span class="desc">
                   <edit-span :value="skill.description" @edit="edit(`skills[${index}].description`,$event)"></edit-span>
                 </span>
+                <span class="close" v-show="index>3" @click="removeSkill(index)">x</span>
+              </li>
+              <li>
+                <span @click="addSkills">添加</span>
               </li>
             </ul>
           </div>
