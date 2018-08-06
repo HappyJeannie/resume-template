@@ -1,3 +1,6 @@
+div[v-cloak] {
+  display: none;
+}
 #app {
   display: flex;
   flex-direction: row-reverse;

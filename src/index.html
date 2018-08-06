@@ -197,7 +197,7 @@
         </section>
       </div>
     </main>
-    <div class="login modal" v-show="showLogin">
+    <div class="login modal" v-show="showLogin" v-cloak>
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>登录</h4>
@@ -222,7 +222,7 @@
         </form>
       </div>
     </div>
-    <div class="regist modal" v-show="showRegist">
+    <div class="regist modal" v-show="showRegist" v-cloak>
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>新用户注册</h4>
@@ -252,7 +252,7 @@
         </form>
       </div>
     </div>
-    <div class="forget modal" v-show="showForget">
+    <div class="forget modal" v-show="showForget" v-cloak>
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>忘记密码</h4>
