@@ -58,6 +58,7 @@ div[v-cloak] {
 #app main div.resume section.career .list ul li,
 #app main div.resume section.project .list ul li {
   display: block;
+  position: relative;
 }
 #app main div.resume section.career .list ul li div.top,
 #app main div.resume section.project .list ul li div.top {
@@ -70,6 +71,12 @@ div[v-cloak] {
 #app main div.resume section.project .list ul li div.btm {
   font-size: 14px;
   line-height: 28px;
+}
+#app main div.resume section.career .list ul li .close,
+#app main div.resume section.project .list ul li .close {
+  position: absolute;
+  right: -6px;
+  bottom: 0px;
 }
 #app main div.resume section.edu .list ul li {
   justify-content: space-between;

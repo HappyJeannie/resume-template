@@ -116,54 +116,24 @@
           <h2>项目经历</h2>
           <div class="list">
             <ul>
-              <li>
+              <li v-for="project,index in resume.projects" v-key="index">
                 <div class="top">
                   <div class="lt">
-                    <span class="name">xxx 项目</span>
-                    <span class="link">link</span>
+                    <edit-span :value="project.name" @edit="edit(`projects[${index}].name`,$event)"></edit-span>
+                    <edit-span :value="project.link" @edit="edit(`projects[${index}].link`,$event)"></edit-span>
                   </div>
                   <div class="rt">
-                    <span class="keywords">css html</span>
+                    <edit-span :value="project.keywords" @edit="edit(`projects[${index}].keywords`,$event)"></edit-span>
                   </div>
                 </div>
                 <div class="btm">
                   <div class="desc">
-                    描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+                    <edit-span :value="project.description" @edit="edit(`projects[${index}].description`,$event)"></edit-span>
                   </div>
                 </div>
+                <span v-show="index>2" class="close" @click="removeProject(index)">x</span>
               </li>
-              <li>
-                <div class="top">
-                  <div class="lt">
-                    <span class="name">xxx 项目</span>
-                    <span class="link">link</span>
-                  </div>
-                  <div class="rt">
-                    <span class="keywords">css html</span>
-                  </div>
-                </div>
-                <div class="btm">
-                  <div class="desc">
-                    描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="top">
-                  <div class="lt">
-                    <span class="name">xxx 项目</span>
-                    <span class="link">link</span>
-                  </div>
-                  <div class="rt">
-                    <span class="keywords">css html</span>
-                  </div>
-                </div>
-                <div class="btm">
-                  <div class="desc">
-                    描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-                  </div>
-                </div>
-              </li>
+              <li><span @click="addProject">添加</span></li>
             </ul>
           </div>
         </section>
@@ -197,7 +167,7 @@
           <div class="input-group">
             <label>
               <span class="title">用户名：</span>
-              <input type="text" placeholder="请输入用户名" name="username" v-model="login.username"/>
+              <input type="text" placeholder="请输入用户名" name="username" v-model="login.username" />
             </label>
           </div>
           <div class="input-group">
@@ -222,19 +192,19 @@
           <div class="input-group">
             <label>
               <span class="title">邮箱：</span>
-              <input type="email" placeholder="请输入邮箱" name="email" v-model="regist.email"/>
+              <input type="email" placeholder="请输入邮箱" name="email" v-model="regist.email" />
             </label>
           </div>
           <div class="input-group">
             <label>
               <span class="title">用户名：</span>
-              <input type="text" placeholder="请输入用户名" name="username" v-model="regist.username"/>
+              <input type="text" placeholder="请输入用户名" name="username" v-model="regist.username" />
             </label>
           </div>
           <div class="input-group">
             <label>
               <span class="title">密码：</span>
-              <input type="password" placeholder="请输入密码" name="password" v-model="regist.password"/>
+              <input type="password" placeholder="请输入密码" name="password" v-model="regist.password" />
             </label>
           </div>
           <div class="input-group submit">

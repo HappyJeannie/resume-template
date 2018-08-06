@@ -17,6 +17,12 @@ let vm = new Vue({
           {name:'技能名称',description:'技能描述'},
           {name:'技能名称',description:'技能描述'},
           {name:'技能名称',description:'技能描述'}
+        ],
+        projects:[
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'}
         ]
       },
       login:{
@@ -200,6 +206,18 @@ let vm = new Vue({
     removeSkill(idx){
       console.log(idx);
       this.resume.skills.splice(idx,1);
+    },
+    addProject(){
+      this.resume.projects.push({
+        name:'项目名称',
+        link:'https:xxx.xxx.com',
+        keywords:'关键字',
+        description:'项目描述'
+      })
+    },
+    removeProject(idx){
+      console.log(idx);
+      this.resume.projects.splice(idx,1);
     }
   }
 })
