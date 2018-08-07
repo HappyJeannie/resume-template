@@ -59,7 +59,8 @@ let vm = new Vue({
       forget:{
         email:''
       },
-      currentUser:{}
+      currentUser:{},
+      skin:'default'  // 默认是 default ， 其他值为 dark
     }
   },
   created(){
@@ -271,6 +272,9 @@ let vm = new Vue({
     },
     print(){
       window.print();
+    },
+    toggleSkin(){
+      this.skin = this.skin ==='default'?'dark':'default';
     }
   }
 })
