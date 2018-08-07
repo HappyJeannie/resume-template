@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="./css/login.css" />
   <link rel="stylesheet" type="text/css" href="./css/regist.css" />
   <link rel="stylesheet" type="text/css" href="./css/forget.css" />
+  <link rel="stylesheet" type="text/css" href="./css/share.css" />
   <link rel="stylesheet" type="text/css" href="./css/index.css" />
 </head>
 
@@ -20,7 +21,7 @@
         <button @click="clickSaveBtn">保存</button>
         <button>删除</button>
         <button>预览</button>
-        <button>分享</button>
+        <button @click="shareModal">分享</button>
       </div>
       <div class="btm">
         <button v-if="isLogin" @click="logout">退出</button>
@@ -230,6 +231,13 @@
             <button type="submit">确定</button>
           </div>
         </form>
+      </div>
+    </div>
+    <div class="share modal" v-show="showPreview" v-cloak>
+      <div class="shadow" @click="closeModal"></div>
+      <div class="form">
+        <h4>请将以下链接复制到浏览器中即可预览：</h4>
+        <textarea readonly>https://www.baidu.com/src/admin.html?user_id=jfksjfiurieg023928493759405930905</textarea>
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ let vm = new Vue({
       showLogin:false,
       showRegist:false,
       showForget:false,
+      showPreview:false,
       isLogin:false,
       resume : {
         name : 'Summer',
@@ -87,25 +88,26 @@ let vm = new Vue({
         );
     },
     loginModal(){
-      console.log('跳转登录');
-      this.showLogin = true;
-      this.showRegist = false;
-      this.showForget = false;
+      this.setModalStatus([true,false,false,false]);
+      
     },
     registModal(){
-      this.showLogin = false;
-      this.showRegist = true;
-      this.showForget = false;
+      this.setModalStatus([false,true,false,false]);
     },
     forgetModal(){
-      this.showLogin = false;
-      this.showRegist = false;
-      this.showForget = true;
+      this.setModalStatus([false,false,true,false]);
+    },
+    shareModal(){
+      this.setModalStatus([false,false,false,true]);
     },
     closeModal(){
-      this.showLogin = false;
-      this.showRegist = false;
-      this.showForget = false;
+      this.setModalStatus([false,false,false,false]);
+    },
+    setModalStatus(arr){
+      let modalArr = ['showLogin','showRegist','showForget','showPreview'];
+      for(let i = 0;i<arr.length;i++){
+        this[modalArr[i]] = arr[i];
+      }
     },
     toLogin(){
       // 登录表单提交
