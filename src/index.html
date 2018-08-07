@@ -12,18 +12,22 @@
   <link rel="stylesheet" type="text/css" href="./css/forget.css" />
   <link rel="stylesheet" type="text/css" href="./css/share.css" />
   <link rel="stylesheet" type="text/css" href="./css/index.css" />
+  <link rel="stylesheet" type="text/css" href="./css/print.css" media="print"/>
 </head>
 
 <body>
   <div id="app">
-    <aside v-if="mode === 'edit'">
-      <div class="tp">
+    <aside>
+      <div class="tp" v-if="mode === 'edit'">
         <button @click="clickSaveBtn">保存</button>
-        <button>删除</button>
-        <button>预览</button>
+        <button @click="print">打印</button>
+        <button @click="mode='preview'">预览</button>
         <button @click="shareModal">分享</button>
       </div>
-      <div class="btm">
+      <div class="tp" v-else>
+          <button @click="mode='edit'">退出预览</button>
+      </div>
+      <div class="btm" v-if="mode === 'edit'">
         <button v-if="isLogin" @click="logout">退出</button>
         <button v-else @click="loginModal">登录</button>
       </div>

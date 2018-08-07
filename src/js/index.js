@@ -268,6 +268,9 @@ let vm = new Vue({
     removeProject(idx){
       console.log(idx);
       this.resume.projects.splice(idx,1);
+    },
+    print(){
+      window.print();
     }
   }
 })
