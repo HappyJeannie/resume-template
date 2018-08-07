@@ -7,12 +7,14 @@ let vm = new Vue({
       showForget:false,
       showPreview:false,
       isLogin:false,
+      previewURL:'',
+      previewId:'',
       resume : {
-        name : 'Summer',
-        age : '22',
-        gender : '男',
-        phone : 13313313133,
-        email : '111@qq.com',
+        name : '姓名',
+        age : '年龄',
+        gender : '性别',
+        phone : '电话',
+        email : '邮箱',
         skills:[
           {name:'技能名称',description:'技能描述'},
           {name:'技能名称',description:'技能描述'},
@@ -26,8 +28,27 @@ let vm = new Vue({
           {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'}
         ]
       },
+      previewResume:{
+        name : '',
+        age : '',
+        gender : '',
+        phone : '',
+        email : '',
+        skills:[],
+        projects:[]
+      },
+      displayResume:{
+        name : '',
+        age : '',
+        gender : '',
+        phone : '',
+        email : '',
+        skills:[],
+        projects:[]
+      },
+      mode:'edit',    // 默认为 edit 编辑状态，还有 preview 预览状态
       login:{
-        username:'',
+        username:'',  
         password:''
       },
       regist:{
@@ -42,7 +63,20 @@ let vm = new Vue({
     }
   },
   created(){
-    this.checkLogin();
+    // 页面进来根据 url 检查用户是处于预览模式还是编辑模式
+    // 如果是编辑模式，需要验证用户是否登录
+    // 如果是预览模式则去获取用户的简历信息 
+    if(window.location.href.indexOf('user_id') > -1){
+      // 预览模式
+      console.log('预览模式')
+      this.previewId = window.location.href.split('?')[1].split('=')[1];
+      this.mode = 'preview';
+      this.getUserInfo();
+    }else{
+      console.log('非预览模式')
+      this.checkLogin();
+      this.mode = 'edit';
+    }
   },
   methods:{
     edit(key,value){
@@ -99,6 +133,12 @@ let vm = new Vue({
     },
     shareModal(){
       this.setModalStatus([false,false,false,true]);
+      if(!this.currentUser.objectId){
+        this.previewURL = '登录后方可预览简历';
+      }else{
+        this.previewURL = window.location.href + '?user_id=' + this.currentUser.objectId
+      }
+      
     },
     closeModal(){
       this.setModalStatus([false,false,false,false]);
@@ -115,7 +155,10 @@ let vm = new Vue({
         alert('用户名或密码不能为空');
       }else{
         AV.User.logIn(this.login.username, this.login.password).then((user) => {
+          console.log('登录成功后的用户信息')
           this.currentUser = user.toJSON();
+          this.displayResume = user.attributes.resume;
+          console.log(user);
           this.closeModal();
           this.isLogin = true;
         }, function (error) {
@@ -174,20 +217,23 @@ let vm = new Vue({
         console.log('登出成功')
         this.currentUser = {};
         this.isLogin = false;
+        this.displayResume = this.resume;
       });
     },
-    getUserInfo(){
+    getUserInfo(mode){
       console.log('获取用户信息')
+      let userId = this.mode === 'edit' ? this.currentUser.objectId : this.previewId;
       let user = new AV.Query('User');
-      user.get(this.currentUser.objectId).then((res)=> {
-      
-        //this.resume = res.attributes.resume;
-        Object.assign(this.resume,res.attributes.resume);
+      user.get(userId).then((res)=> {
+        //console.log(res);
+      //   //mode === 'edit' ? Object.assign(this.resume,res.attributes.resume) : Object.assign(this.previewResume,res.attributes.resume)
+      //   //this.resume = res.attributes.resume;
+        Object.assign(this.displayResume,res.attributes.resume);
     
       }).catch(function (error) {
         // 异常处理
-        console.error(error);
-      });
+         console.error(error);
+       });
     },
     checkLogin(){
       let currentUser = AV.User.current();
@@ -197,6 +243,8 @@ let vm = new Vue({
         this.currentUser = currentUser.toJSON();
         this.isLogin = true;
         this.getUserInfo();
+      }else{
+        this.displayResume = this.resume;
       }
     },
     addSkills(){

@@ -16,7 +16,7 @@
 
 <body>
   <div id="app">
-    <aside>
+    <aside v-if="mode === 'edit'">
       <div class="tp">
         <button @click="clickSaveBtn">保存</button>
         <button>删除</button>
@@ -32,12 +32,12 @@
       <div class="resume">
         <section class="profile">
           <h1>
-            <edit-span :value="resume.name" @edit="edit('name',$event)"></edit-span>
+            <edit-span :disabled="mode==='edit'" :disabled="mode==='edit'" :value="displayResume.name" @edit="edit('name',$event)"></edit-span>
           </h1>
-          <edit-span :value="resume.age" @edit="edit('age',$event)"></edit-span> |
-          <edit-span :value="resume.gender" @edit="edit('gender',$event)"></edit-span> |
-          <edit-span :value="resume.phone" @edit="edit('phone',$event)"></edit-span> |
-          <edit-span :value="resume.email" @edit="edit('email',$event)"></edit-span>
+          <edit-span :disabled="mode==='edit'" :value="displayResume.age" @edit="edit('age',$event)"></edit-span> |
+          <edit-span :disabled="mode==='edit'" :value="displayResume.gender" @edit="edit('gender',$event)"></edit-span> |
+          <edit-span :disabled="mode==='edit'" :value="displayResume.phone" @edit="edit('phone',$event)"></edit-span> |
+          <edit-span :disabled="mode==='edit'" :value="displayResume.email" @edit="edit('email',$event)"></edit-span>
         </section>
         <section class="career">
           <h2>工作经历</h2>
@@ -117,24 +117,24 @@
           <h2>项目经历</h2>
           <div class="list">
             <ul>
-              <li v-for="project,index in resume.projects" v-key="index">
+              <li v-for="project,index in displayResume.projects" v-key="index">
                 <div class="top">
                   <div class="lt">
-                    <edit-span :value="project.name" @edit="edit(`projects[${index}].name`,$event)"></edit-span>
-                    <edit-span :value="project.link" @edit="edit(`projects[${index}].link`,$event)"></edit-span>
+                    <edit-span :disabled="mode==='edit'" :value="project.name" @edit="edit(`projects[${index}].name`,$event)"></edit-span>
+                    <edit-span :disabled="mode==='edit'" :value="project.link" @edit="edit(`projects[${index}].link`,$event)"></edit-span>
                   </div>
                   <div class="rt">
-                    <edit-span :value="project.keywords" @edit="edit(`projects[${index}].keywords`,$event)"></edit-span>
+                    <edit-span :disabled="mode==='edit'" :value="project.keywords" @edit="edit(`projects[${index}].keywords`,$event)"></edit-span>
                   </div>
                 </div>
                 <div class="btm">
                   <div class="desc">
-                    <edit-span :value="project.description" @edit="edit(`projects[${index}].description`,$event)"></edit-span>
+                    <edit-span :disabled="mode==='edit'" :value="project.description" @edit="edit(`projects[${index}].description`,$event)"></edit-span>
                   </div>
                 </div>
-                <span v-show="index>2" class="close" @click="removeProject(index)">x</span>
+                <span v-if="index>2 && mode === 'edit'" class="close" @click="removeProject(index)">x</span>
               </li>
-              <li><span @click="addProject">添加</span></li>
+              <li v-if="mode==='edit'"><span @click="addProject">添加</span></li>
             </ul>
           </div>
         </section>
@@ -142,17 +142,17 @@
           <h2>技能</h2>
           <div class="list">
             <ul>
-              <li v-for="skill,index in resume.skills" v-key="index">
+              <li v-for="skill,index in displayResume.skills" v-key="index">
                 <span class="name">
-                  <edit-span :value="skill.name" @edit="edit(`skills[${index}].name`,$event)"></edit-span>
+                  <edit-span :disabled="mode==='edit'" :value="skill.name" @edit="edit(`skills[${index}].name`,$event)"></edit-span>
                 </span>
                 ：
                 <span class="desc">
-                  <edit-span :value="skill.description" @edit="edit(`skills[${index}].description`,$event)"></edit-span>
+                  <edit-span :disabled="mode==='edit'" :value="skill.description" @edit="edit(`skills[${index}].description`,$event)"></edit-span>
                 </span>
-                <span class="close" v-show="index>3" @click="removeSkill(index)">x</span>
+                <span class="close" v-if="index>3 && mode == 'edit'" @click="removeSkill(index)">x</span>
               </li>
-              <li>
+              <li v-if="mode==='edit'">
                 <span @click="addSkills">添加</span>
               </li>
             </ul>
@@ -237,7 +237,7 @@
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
         <h4>请将以下链接复制到浏览器中即可预览：</h4>
-        <textarea readonly>https://www.baidu.com/src/admin.html?user_id=jfksjfiurieg023928493759405930905</textarea>
+        <textarea readonly>{{previewURL}}</textarea>
       </div>
     </div>
   </div>
