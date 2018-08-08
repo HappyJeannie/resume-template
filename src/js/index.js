@@ -122,9 +122,13 @@ let vm = new Vue({
     },
     shareModal(){
       this.setModalStatus([false,false,false,true]);
+      console.log(1);
       if(!this.currentUser.objectId){
+        console.log(2);
         this.previewURL = '登录后方可预览简历';
       }else{
+        console.log(3);
+        console.log(window.location.href + '?user_id=' + this.currentUser.objectId)
         this.previewURL = window.location.href + '?user_id=' + this.currentUser.objectId
       }
       

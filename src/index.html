@@ -169,13 +169,7 @@
     <login v-show="showLogin" v-cloak @close="closeModal" @regist="registModal" @forget="forgetModal" @userinfo="login($event)"></login>
     <regist v-show="showRegist" v-cloak @close="closeModal" @login="loginModal" @userinfo="regist($event)"></regist>
     <forget v-show="showForget" v-cloak @close="closeModal" @login="loginModal" @openlogin="loginModal"></forget>
-    <div class="share modal" v-show="showPreview" v-cloak>
-      <div class="shadow" @click="closeModal"></div>
-      <div class="form">
-        <h4>请将以下链接复制到浏览器中即可预览：</h4>
-        <textarea readonly>{{previewURL}}</textarea>
-      </div>
-    </div>
+    <share v-show="showPreview" v-cloak @close="closeModal" :url="previewURL"></share>
   </div>
 
   <script src="./../vendors/leancloud/av-min.js"></script>
@@ -185,6 +179,7 @@
   <script src="./js/login.js"></script>
   <script src="./js/regist.js"></script>
   <script src="./js/forget.js"></script>
+  <script src="./js/share.js"></script>
   <script src="./js/index.js"></script>
 </body>
 
