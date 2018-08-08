@@ -47,10 +47,6 @@ let vm = new Vue({
         projects:[]
       },
       mode:'edit',    // 默认为 edit 编辑状态，还有 preview 预览状态
-      login:{
-        username:'',  
-        password:''
-      },
       regist:{
         email:'',
         username:'',
@@ -124,9 +120,9 @@ let vm = new Vue({
     },
     loginModal(){
       this.setModalStatus([true,false,false,false]);
-      
     },
     registModal(){
+      console.log('跳转至注册')
       this.setModalStatus([false,true,false,false]);
     },
     forgetModal(){
@@ -148,26 +144,6 @@ let vm = new Vue({
       let modalArr = ['showLogin','showRegist','showForget','showPreview'];
       for(let i = 0;i<arr.length;i++){
         this[modalArr[i]] = arr[i];
-      }
-    },
-    toLogin(){
-      // 登录表单提交
-      if(this.login.username === '' || this.login.password === ''){
-        alert('用户名或密码不能为空');
-      }else{
-        AV.User.logIn(this.login.username, this.login.password).then((user) => {
-          console.log('登录成功后的用户信息')
-          this.currentUser = user.toJSON();
-          this.displayResume = user.attributes.resume;
-          console.log(user);
-          this.closeModal();
-          this.isLogin = true;
-        }, function (error) {
-          console.log('登录出错')
-          if(error.code === 211){
-            alert('用户未注册')
-          }
-        });
       }
     },
     toRegist(){
@@ -275,6 +251,15 @@ let vm = new Vue({
     },
     toggleSkin(){
       this.skin = this.skin ==='default'?'dark':'default';
+    },
+    login(data){
+      console.log('登录成功');
+      console.log(data);
+      for(var key in data){
+        console.log(key)
+        console.log(this[key])
+        Object.assign(this[key],data[key]);
+      }
     }
   }
 })
