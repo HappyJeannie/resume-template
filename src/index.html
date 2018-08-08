@@ -167,36 +167,7 @@
       </div>
     </main>
     <login v-show="showLogin" v-cloak @close="closeModal" @regist="registModal" @forget="forgetModal" @userinfo="login($event)"></login>
-    <div class="regist modal" v-show="showRegist" v-cloak>
-      <div class="shadow" @click="closeModal"></div>
-      <div class="form">
-        <h4>新用户注册</h4>
-        <form @submit.prevent="toRegist">
-          <div class="input-group">
-            <label>
-              <span class="title">邮箱：</span>
-              <input type="email" placeholder="请输入邮箱" name="email" v-model="regist.email" />
-            </label>
-          </div>
-          <div class="input-group">
-            <label>
-              <span class="title">用户名：</span>
-              <input type="text" placeholder="请输入用户名" name="username" v-model="regist.username" />
-            </label>
-          </div>
-          <div class="input-group">
-            <label>
-              <span class="title">密码：</span>
-              <input type="password" placeholder="请输入密码" name="password" v-model="regist.password" />
-            </label>
-          </div>
-          <div class="input-group submit">
-            <span @click="loginModal">已有账号，立即登录</span>
-            <button type="submit">确定</button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <regist v-show="showRegist" v-cloak @close="closeModal" @login="loginModal" @userinfo="regist($event)"></regist>
     <div class="forget modal" v-show="showForget" v-cloak>
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
@@ -229,6 +200,7 @@
   <script src="./../vendors/vue/vue.min.js"></script>
   <script src="./js/edit-sapn.js"></script>
   <script src="./js/login.js"></script>
+  <script src="./js/regist.js"></script>
   <script src="./js/index.js"></script>
 </body>
 

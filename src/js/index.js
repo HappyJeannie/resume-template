@@ -47,11 +47,6 @@ let vm = new Vue({
         projects:[]
       },
       mode:'edit',    // 默认为 edit 编辑状态，还有 preview 预览状态
-      regist:{
-        email:'',
-        username:'',
-        password:''
-      },
       forget:{
         email:''
       },
@@ -146,32 +141,6 @@ let vm = new Vue({
         this[modalArr[i]] = arr[i];
       }
     },
-    toRegist(){
-      // 注册表单提交
-      if(this.regist.username === '' || this.regist.password === '' || this.regist.email === ''){
-        alert('用户名、密码和邮箱不能为空');
-      }else{
-         // 新建 AVUser 对象实例
-        let user = new AV.User();
-        // 设置用户名
-        user.setUsername(this.regist.username);
-        // 设置密码
-        user.setPassword(this.regist.password);
-        // 设置邮箱
-        user.setEmail(this.regist.email);
-        user.signUp().then((user) => {
-          console.log('注册成功')
-            console.log(user);
-            this.currentUser = user.toJSON();
-            this.closeModal();
-            this.isLogin = true;
-        }, function (error) {
-          console.log('注册失败')
-          console.log(error.code)
-          console.log(error)
-        });
-      }
-    },
     toForget(){
       // 忘记密码表单提交
       if(this.forget.email === ''){
@@ -205,6 +174,7 @@ let vm = new Vue({
         //console.log(res);
       //   //mode === 'edit' ? Object.assign(this.resume,res.attributes.resume) : Object.assign(this.previewResume,res.attributes.resume)
       //   //this.resume = res.attributes.resume;
+        console.log(res);
         Object.assign(this.displayResume,res.attributes.resume);
     
       }).catch(function (error) {
@@ -253,12 +223,32 @@ let vm = new Vue({
       this.skin = this.skin ==='default'?'dark':'default';
     },
     login(data){
+      // 登录成功后获取数据
       console.log('登录成功');
       console.log(data);
       for(var key in data){
         console.log(key)
         console.log(this[key])
-        Object.assign(this[key],data[key]);
+        if(key === 'isLogin'){
+          this[key]=data[key]
+        }else{
+          Object.assign(this[key],data[key]);
+        }
+      }
+    },
+    regist(data){
+      // 注册成功后获取数据
+      console.log('注册成功');
+      console.log(data);
+      for(var key in data){
+        console.log(key)
+        console.log(this[key])
+        console.log(data[key])
+        if(key === 'isLogin'){
+          this[key]=data[key]
+        }else{
+          Object.assign(this[key],data[key]);
+        }
       }
     }
   }

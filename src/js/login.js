@@ -34,7 +34,6 @@ Vue.component('login', {
       }
     }
   },
-  props: ['value', 'disabled'],
   methods: {
     toLogin(){
       // 登录表单提交
