@@ -168,24 +168,7 @@
     </main>
     <login v-show="showLogin" v-cloak @close="closeModal" @regist="registModal" @forget="forgetModal" @userinfo="login($event)"></login>
     <regist v-show="showRegist" v-cloak @close="closeModal" @login="loginModal" @userinfo="regist($event)"></regist>
-    <div class="forget modal" v-show="showForget" v-cloak>
-      <div class="shadow" @click="closeModal"></div>
-      <div class="form">
-        <h4>忘记密码</h4>
-        <form @submit.prevent="toForget">
-          <div class="input-group">
-            <label>
-              <span class="title">邮箱：</span>
-              <input type="text" placeholder="请输入注册邮箱" name="email" v-model="forget.email" />
-            </label>
-          </div>
-          <div class="input-group submit">
-            <span @click="loginModal">登录</span>
-            <button type="submit">确定</button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <forget v-show="showForget" v-cloak @close="closeModal" @login="loginModal" @openlogin="loginModal"></forget>
     <div class="share modal" v-show="showPreview" v-cloak>
       <div class="shadow" @click="closeModal"></div>
       <div class="form">
@@ -201,6 +184,7 @@
   <script src="./js/edit-sapn.js"></script>
   <script src="./js/login.js"></script>
   <script src="./js/regist.js"></script>
+  <script src="./js/forget.js"></script>
   <script src="./js/index.js"></script>
 </body>
 

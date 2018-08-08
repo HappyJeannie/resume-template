@@ -47,9 +47,6 @@ let vm = new Vue({
         projects:[]
       },
       mode:'edit',    // 默认为 edit 编辑状态，还有 preview 预览状态
-      forget:{
-        email:''
-      },
       currentUser:{},
       skin:'default'  // 默认是 default ， 其他值为 dark
     }
@@ -141,22 +138,6 @@ let vm = new Vue({
         this[modalArr[i]] = arr[i];
       }
     },
-    toForget(){
-      // 忘记密码表单提交
-      if(this.forget.email === ''){
-        alert('邮箱不能为空');
-      }else{
-        AV.User.requestPasswordReset(this.forget.email).then((success)=> {
-          console.log(success)
-          alert('请查看邮箱');
-          this.loginModal();
-        }, function (error) {
-          console.log('忘记密码邮箱验证失败')
-          console.log(error.code)
-          console.log(error)
-        });
-      }
-    },
     logout(){
       // 登出
       AV.User.logOut().then((res)=>{
@@ -224,11 +205,7 @@ let vm = new Vue({
     },
     login(data){
       // 登录成功后获取数据
-      console.log('登录成功');
-      console.log(data);
       for(var key in data){
-        console.log(key)
-        console.log(this[key])
         if(key === 'isLogin'){
           this[key]=data[key]
         }else{
@@ -238,12 +215,7 @@ let vm = new Vue({
     },
     regist(data){
       // 注册成功后获取数据
-      console.log('注册成功');
-      console.log(data);
       for(var key in data){
-        console.log(key)
-        console.log(this[key])
-        console.log(data[key])
         if(key === 'isLogin'){
           this[key]=data[key]
         }else{
