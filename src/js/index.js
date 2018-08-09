@@ -9,46 +9,10 @@ let vm = new Vue({
       isLogin:false,
       previewURL:'',
       previewId:'',
-      resume : {
-        name : '姓名',
-        age : '年龄',
-        gender : '性别',
-        phone : '电话',
-        email : '邮箱',
-        skills:[
-          {name:'技能名称',description:'技能描述'},
-          {name:'技能名称',description:'技能描述'},
-          {name:'技能名称',description:'技能描述'},
-          {name:'技能名称',description:'技能描述'}
-        ],
-        projects:[
-          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
-          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
-          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
-          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'}
-        ]
-      },
-      previewResume:{
-        name : '',
-        age : '',
-        gender : '',
-        phone : '',
-        email : '',
-        skills:[],
-        projects:[]
-      },
-      displayResume:{
-        name : '',
-        age : '',
-        gender : '',
-        phone : '',
-        email : '',
-        skills:[],
-        projects:[]
-      },
       mode:'edit',    // 默认为 edit 编辑状态，还有 preview 预览状态
       currentUser:{},
-      skin:'default'  // 默认是 default ， 其他值为 dark
+      skin:'default',  // 默认是 default ， 其他值为 dark
+      userId:''
     }
   },
   created(){
@@ -60,7 +24,7 @@ let vm = new Vue({
       console.log('预览模式')
       this.previewId = window.location.href.split('?')[1].split('=')[1];
       this.mode = 'preview';
-      this.getUserInfo();
+      this.userId = this.previewId;
     }else{
       console.log('非预览模式')
       this.checkLogin();
@@ -68,48 +32,17 @@ let vm = new Vue({
     }
   },
   methods:{
-    edit(key,value){
-      let reg = /\[(\d+)\]/;
-      key = key.replace(reg,(val,num)=>{return '.'+num});
-      keys= key.split('.');
-      let result = this.resume;
-      for(let i = 0;i<keys.length;i++){
-        if(i===keys.length-1){
-          result[keys[i]] = value;
-        }else{
-          result = result[keys[i]];
-        }
-      }
-    },
     clickSaveBtn(){
-      console.log(1);
       let currentUser = AV.User.current();
-      console.log(currentUser)
       if (currentUser) {
         this.save();
-      }
-      else {
+      }else {
         this.loginModal();
       }
     },
     save(){
-      console.log('保存用户信息')
-      let user = AV.Object.createWithoutData('User', this.currentUser.objectId);
-      // 修改属性
-      user.set('resume', this.resume);
       // 保存到云端
-      user.save()
-        .then(
-          (res)=>{
-            console.log('保存成功')
-            console.log(res.toJSON());
-          },
-          (error) => {
-            console.log('请求出错')
-            console.log(error.code)
-            console.log(error)
-          }
-        );
+      this.$refs.childresume.save();
     },
     loginModal(){
       this.setModalStatus([true,false,false,false]);
@@ -149,24 +82,7 @@ let vm = new Vue({
         console.log('登出成功')
         this.currentUser = {};
         this.isLogin = false;
-        this.displayResume = this.resume;
       });
-    },
-    getUserInfo(mode){
-      console.log('获取用户信息')
-      let userId = this.mode === 'edit' ? this.currentUser.objectId : this.previewId;
-      let user = new AV.Query('User');
-      user.get(userId).then((res)=> {
-        //console.log(res);
-      //   //mode === 'edit' ? Object.assign(this.resume,res.attributes.resume) : Object.assign(this.previewResume,res.attributes.resume)
-      //   //this.resume = res.attributes.resume;
-        console.log(res);
-        Object.assign(this.displayResume,res.attributes.resume);
-    
-      }).catch(function (error) {
-        // 异常处理
-         console.error(error);
-       });
     },
     checkLogin(){
       let currentUser = AV.User.current();
@@ -175,9 +91,7 @@ let vm = new Vue({
         console.log(currentUser.toJSON())
         this.currentUser = currentUser.toJSON();
         this.isLogin = true;
-        this.getUserInfo();
-      }else{
-        this.displayResume = this.resume;
+        this.userId = currentUser.id;
       }
     },
     addSkills(){
@@ -227,6 +141,10 @@ let vm = new Vue({
     },
     changemode(mode){
       this.mode = mode;
+      if(window.location.href.indexOf('?')> -1){
+        window.location.href = window.location.href.split('?')[0];
+      }
+      this.checkLogin();
     }
   }
 })
