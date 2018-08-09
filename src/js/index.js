@@ -82,6 +82,7 @@ let vm = new Vue({
       }
     },
     clickSaveBtn(){
+      console.log(1);
       let currentUser = AV.User.current();
       console.log(currentUser)
       if (currentUser) {
@@ -201,9 +202,6 @@ let vm = new Vue({
       console.log(idx);
       this.resume.projects.splice(idx,1);
     },
-    print(){
-      window.print();
-    },
     toggleSkin(){
       this.skin = this.skin ==='default'?'dark':'default';
     },
@@ -226,6 +224,9 @@ let vm = new Vue({
           Object.assign(this[key],data[key]);
         }
       }
+    },
+    changemode(mode){
+      this.mode = mode;
     }
   }
 })

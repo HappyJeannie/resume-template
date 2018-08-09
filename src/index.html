@@ -18,22 +18,7 @@
 
 <body>
   <div id="app" :class="{dark: skin==='dark'}">
-    <aside>
-      <div class="tp" v-if="mode === 'edit'">
-        <button @click="clickSaveBtn">保存</button>
-        <button @click="print">打印</button>
-        <button @click="mode='preview'">预览</button>
-        <button @click="shareModal">分享</button>
-        <button @click="toggleSkin">换肤</button>
-      </div>
-      <div class="tp" v-else>
-          <button @click="mode='edit'">退出预览</button>
-      </div>
-      <div class="btm" v-if="mode === 'edit'">
-        <button v-if="isLogin" @click="logout">退出</button>
-        <button v-else @click="loginModal">登录</button>
-      </div>
-    </aside>
+    <app-aside :mode="mode" :islogin="isLogin" @save="clickSaveBtn" @share="shareModal" @changemode="changemode" @skin="toggleSkin" @login="loginModal" @logout="logout"></app-aside>
     <main>
       <div class="resume">
         <section class="profile">
@@ -180,6 +165,7 @@
   <script src="./js/regist.js"></script>
   <script src="./js/forget.js"></script>
   <script src="./js/share.js"></script>
+  <script src="./js/aside.js"></script>
   <script src="./js/index.js"></script>
 </body>
 
