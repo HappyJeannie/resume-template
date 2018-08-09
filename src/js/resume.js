@@ -163,6 +163,25 @@ Vue.component('resume', {
           {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'}
         ]
       },
+      defaultResume:{
+        name : '姓名',
+        age : '年龄',
+        gender : '性别',
+        phone : '电话',
+        email : '邮箱',
+        skills:[
+          {name:'技能名称',description:'技能描述'},
+          {name:'技能名称',description:'技能描述'},
+          {name:'技能名称',description:'技能描述'},
+          {name:'技能名称',description:'技能描述'}
+        ],
+        projects:[
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'},
+          {name:'项目名称',link:'https:xxx.xxx.com',keywords:'关键字',description:'项目描述'}
+        ]
+      },
       previewResume:{
         name : '',
         age : '',
@@ -176,10 +195,9 @@ Vue.component('resume', {
     }
   },
   methods: {
-    addProject(){},
-    addSkills(){},
     getUserInfo(){
       console.log('获取用户信息')
+      console.log(this.userid);
       if(this.userid === ''){
         this.displayResume = this.resume
       }else{
@@ -225,10 +243,42 @@ Vue.component('resume', {
           result = result[keys[i]];
         }
       }
+    },
+    addSkills(){
+      console.log('添加技能')
+      this.displayResume.skills.push({
+        name:'请填写技能名称',
+        description:'请填写技能描述'
+      })
+    },
+    addProject(){
+      this.displayResume.projects.push({
+        name:'项目名称',
+        link:'https:xxx.xxx.com',
+        keywords:'关键字',
+        description:'项目描述'
+      })
+    },
+    removeSkill(idx){
+      console.log(idx);
+      this.displayResume.skills.splice(idx,1);
+    },
+    removeProject(idx){
+      console.log(idx);
+      this.displayResume.projects.splice(idx,1);
     }
   },
   created(){
     console.log(this.userid);
     this.getUserInfo();
+  },
+  watch:{
+    islogin:function(newStatus,oldStatus){
+      if(newStatus){
+        this.getUserInfo()
+      }else{
+        this.displayResume = this.defaultResume;
+      }
+    }
   }
 })

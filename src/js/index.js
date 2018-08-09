@@ -94,40 +94,22 @@ let vm = new Vue({
         this.userId = currentUser.id;
       }
     },
-    addSkills(){
-      this.resume.skills.push({
-        name:'请填写技能名称',
-        description:'请填写技能描述'
-      })
-    },
-    removeSkill(idx){
-      console.log(idx);
-      this.resume.skills.splice(idx,1);
-    },
-    addProject(){
-      this.resume.projects.push({
-        name:'项目名称',
-        link:'https:xxx.xxx.com',
-        keywords:'关键字',
-        description:'项目描述'
-      })
-    },
-    removeProject(idx){
-      console.log(idx);
-      this.resume.projects.splice(idx,1);
-    },
     toggleSkin(){
       this.skin = this.skin ==='default'?'dark':'default';
     },
     login(data){
       // 登录成功后获取数据
-      for(var key in data){
-        if(key === 'isLogin'){
-          this[key]=data[key]
-        }else{
-          Object.assign(this[key],data[key]);
-        }
-      }
+      console.log('登录成功')
+      console.log(data);
+      // for(var key in data){
+      //   if(key === 'isLogin'){
+      //     this[key]=data[key]
+      //   }else{
+      //     Object.assign(this[key],data[key]);
+      //   }
+      // }
+      this.isLogin = data.isLogin;
+      this.userId = data.currentUser.objectId;
     },
     regist(data){
       // 注册成功后获取数据
