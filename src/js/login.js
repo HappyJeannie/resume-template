@@ -1,7 +1,7 @@
 window.Login = {
   template: `
     <div class="login modal">
-      <div class="shadow" @click="$emit('close')"></div>
+      <div class="shadow" @click="toHome"></div>
       <div class="form">
         <h4>登录</h4>
         <form @submit.prevent="toLogin">
@@ -41,8 +41,18 @@ window.Login = {
         alert('用户名或密码不能为空');
       }else{
         AV.User.logIn(this.login.username, this.login.password).then((user) => {
-          this.$emit('userinfo',{currentUser:user.toJSON(),displayResume:user.attributes.resume,isLogin:true});
-          this.$emit('close');
+          this.$router.push('/');
+          // console.log('输出 this')
+          // console.log(this);
+          console.log(user);
+          let data = user.toJSON();
+          this.currentUser = data;
+          console.log(user.toJSON())
+          this.isLogin = true;
+          this.userId = data.objectId;
+          console.log(this);
+          //this.currentUser = {currentUser:user.toJSON(),displayResume:user.attributes.resume,isLogin:true};
+          //eventBud.$emit('login',{currentUser:user.toJSON(),displayResume:user.attributes.resume,isLogin:true})
         }, function (error) {
           console.log('登录出错')
           console.log(error.code);
@@ -54,6 +64,9 @@ window.Login = {
           }
         });
       }
+    },
+    toHome(){
+      this.$router.push('/')
     }
   }
 }

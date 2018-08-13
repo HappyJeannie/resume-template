@@ -6,6 +6,11 @@ div[v-cloak] {
   flex-direction: row-reverse;
   height: 100vh;
 }
+#app > div {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100%;
+}
 #app aside {
   width: 100px;
   display: flex;

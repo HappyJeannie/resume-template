@@ -1,9 +1,9 @@
 window.App = {
   template:`
     <div>
-      <app-aside :mode="mode" :islogin="isLogin" @save="clickSaveBtn" @share="shareModal" @changemode="changemode" @skin="toggleSkin" @login="loginModal" @logout="logout"></app-aside>
+      <app-aside></app-aside>
       <main>
-        <resume ref="childresume" :islogin="isLogin" :userid="userId" :mode="mode"></resume>
+        <resume ref="childresume"></resume>
       </main>
     </div>
     
@@ -11,8 +11,10 @@ window.App = {
   data(){
     return {
       mode :'edit',
-      isLogin:false,
-      userId:''
+      resume:{},
+      currentUser:{
+
+      }
     }
   },
   methods:{
@@ -38,6 +40,9 @@ window.App = {
     logout(){
 
     }
+  },
+  created(){
+    
   }
 }
 

@@ -1,5 +1,5 @@
 Vue.component('resume', {
-  props:['islogin','userid','mode'],
+  props:['isLogin','userid'],
   template: `
     <div class="resume">
       <section class="profile">
@@ -135,6 +135,7 @@ Vue.component('resume', {
   data() {
     return {
       mode : 'edit',
+      isLogin:false,
       displayResume:{
         name : '',
         age : '',
@@ -215,6 +216,7 @@ Vue.component('resume', {
     },
     save(){
       console.log('保存数据啦')
+      console.log(this.userid);
       let user = AV.Object.createWithoutData('User', this.userid);
       // 修改属性
       user.set('resume', this.resume);
@@ -266,11 +268,39 @@ Vue.component('resume', {
     removeProject(idx){
       console.log(idx);
       this.displayResume.projects.splice(idx,1);
+    },
+    addEventBus(){
+      eventBus.$on('save',(res)=>{
+        this.userid = res.userid;
+        this.save();
+      })
+      eventBus.$on('preview',(res)=>{
+        console.log('预览状态');
+        console.log(res);
+        this.mode = res.mode;
+      });
+      eventBus.$on('logour',()=>{
+        console.log('登出');
+        this.isLogin = false;
+      });
     }
   },
   created(){
-    console.log(this.userid);
-    this.getUserInfo();
+    let currentUser = AV.User.current();
+    if (currentUser) {
+      console.log(currentUser)
+      console.log('登录啦')
+      console.log(currentUser.toJSON())
+      let userInfo = currentUser.toJSON();
+      this.currentUser = userInfo;
+      this.isLogin = true;
+      this.userid = currentUser.id;
+      this.resume = userInfo.resume;
+      eventBus.$emit('loginInfo',{isLogin:true,userid:currentUser.id});
+    }
+    
+    this.displayResume = this.resume;
+    this.addEventBus();
   },
   watch:{
     islogin:function(newStatus,oldStatus){
