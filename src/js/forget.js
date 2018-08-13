@@ -1,4 +1,4 @@
-Vue.component('forget', {
+window.Forget = {
   template: `
     <div class="forget modal">
       <div class="shadow" @click="$emit('close')"></div>
@@ -12,7 +12,7 @@ Vue.component('forget', {
             </label>
           </div>
           <div class="input-group submit">
-            <span @click="$emit('login')">登录</span>
+            <span><router-link to="/login">登录</router-link></span>
             <button type="submit">确定</button>
           </div>
         </form>
@@ -47,4 +47,5 @@ Vue.component('forget', {
       }
     }
   }
-})
+}
+Vue.component('forget', window.Forget)

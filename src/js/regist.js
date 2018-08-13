@@ -1,4 +1,4 @@
-Vue.component('regist', {
+window.Regist = {
   template: `
     <div class="regist modal">
       <div class="shadow" @click="$emit('close')"></div>
@@ -24,7 +24,7 @@ Vue.component('regist', {
             </label>
           </div>
           <div class="input-group submit">
-            <span @click="$emit('login')">已有账号，立即登录</span>
+            <span><router-link to="/login">已有账号，立即登录</router-link></span>
             <button type="submit">确定</button>
           </div>
         </form>
@@ -65,7 +65,7 @@ Vue.component('regist', {
       if(this.regist.username === '' || this.regist.password === '' || this.regist.email === ''){
         alert('用户名、密码和邮箱不能为空');
       }else{
-         // 新建 AVUser 对象实例
+        // 新建 AVUser 对象实例
         let user = new AV.User();
         // 设置用户名
         user.setUsername(this.regist.username);
@@ -89,4 +89,5 @@ Vue.component('regist', {
       }
     }
   }
-})
+}
+Vue.component('regist', window.Regist)

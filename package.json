@@ -22,6 +22,7 @@
     "vue": "^2.5.17"
   },
   "dependencies": {
-    "leancloud-storage": "^3.10.0"
+    "leancloud-storage": "^3.10.0",
+    "vue-router": "^3.0.1"
   }
 }

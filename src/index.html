@@ -17,20 +17,23 @@
 </head>
 
 <body>
-  <div id="app" :class="{dark: skin==='dark'}">
-    <app-aside :mode="mode" :islogin="isLogin" @save="clickSaveBtn" @share="shareModal" @changemode="changemode" @skin="toggleSkin" @login="loginModal" @logout="logout"></app-aside>
+  <!-- <div id="app" :class="{dark: skin==='dark'}"> -->
+  <div id="app">
+      <router-view></router-view>
+    <!-- <app-aside :mode="mode" :islogin="isLogin" @save="clickSaveBtn" @share="shareModal" @changemode="changemode" @skin="toggleSkin" @login="loginModal" @logout="logout"></app-aside>
     <main>
       <resume ref="childresume" :islogin="isLogin" :userid="userId" :mode="mode"></resume>
-    </main>
-    <login v-show="showLogin" v-cloak @close="closeModal" @regist="registModal" @forget="forgetModal" @userinfo="login($event)"></login>
+    </main> -->
+    <!-- <login v-show="showLogin" v-cloak @close="closeModal" @regist="registModal" @forget="forgetModal" @userinfo="login($event)"></login>
     <regist v-show="showRegist" v-cloak @close="closeModal" @login="loginModal" @userinfo="regist($event)"></regist>
     <forget v-show="showForget" v-cloak @close="closeModal" @login="loginModal" @openlogin="loginModal"></forget>
-    <share v-show="showPreview" v-cloak @close="closeModal" :url="previewURL"></share>
+    <share v-show="showPreview" v-cloak @close="closeModal" :url="previewURL"></share> -->
   </div>
 
   <script src="./../vendors/leancloud/av-min.js"></script>
   <script src="./../vendors/leancloud/av-init.js"></script>
   <script src="./../vendors/vue/vue.min.js"></script>
+  <script src="./../vendors/vue-router/vue-router.js"></script>
   <script src="./js/edit-sapn.js"></script>
   <script src="./js/login.js"></script>
   <script src="./js/regist.js"></script>
@@ -38,7 +41,10 @@
   <script src="./js/share.js"></script>
   <script src="./js/aside.js"></script>
   <script src="./js/resume.js"></script>
-  <script src="./js/index.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/router.js"></script>  
+  <!-- <script src="./js/index.js"></script> -->
+  <script src="./js/1.js"></script>
 </body>
 
 </html>

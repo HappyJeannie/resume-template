@@ -1,4 +1,4 @@
-Vue.component('login', {
+window.Login = {
   template: `
     <div class="login modal">
       <div class="shadow" @click="$emit('close')"></div>
@@ -18,8 +18,8 @@ Vue.component('login', {
             </label>
           </div>
           <div class="input-group submit">
-            <span @click="$emit('regist')">没有账号？立即注册</span>
-            <span @click="$emit('forget')">忘记密码</span>
+            <spa><router-link to="/regist">没有账号？立即注册</router-link></span>
+            <span><router-link to="/forget">忘记密码</router-link></span>
             <button type="submit">确定</button>
           </div>
         </form>
@@ -56,4 +56,5 @@ Vue.component('login', {
       }
     }
   }
-})
+}
+Vue.component('login', window.Login)
